@@ -1,0 +1,50 @@
+version: "3.1"
+
+services:
+  back:
+    image: node:12
+    environment:
+      YARN_CACHE_FOLDER: /opt/yarn-cache
+    volumes:
+      - ./back:/opt/back
+      - yarn-cache:/opt/yarn-cache
+    working_dir: /opt/back
+    entrypoint: ./entrypoint.sh
+    command: yarn run dev
+    ports:
+      - 3001:3001
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: root
+
+  front:
+    image: node:12
+    environment:
+      YARN_CACHE_FOLDER: /opt/yarn-cache
+    volumes:
+      - ./front:/opt/front
+      - yarn-cache:/opt/yarn-cache
+    working_dir: /opt/front
+    entrypoint: ./entrypoint.sh
+    command: yarn dev
+    depends_on:
+      - "back"
+
+  nginx:
+    build: nginx-dev
+    depends_on:
+      - front
+      - back
+    ports:
+      - 443:443
+      - 80:80
+
+volumes:
+  yarn-cache:

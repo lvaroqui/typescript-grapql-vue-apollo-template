@@ -1,0 +1,16 @@
+overwrite: true
+schema:
+  - "./src/schema/**/*.ts"
+  - "!(src/schema/index.ts)"
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - add:
+          content:
+            - "/* eslint-disable */"
+            - 'import { ParameterizedContext } from "koa";'
+      - "typescript"
+      - "typescript-resolvers"
+    config:
+      maybeValue: T | null | undefined
+      contextType: "{ ctx: ParameterizedContext<any, { user: User }> }"
