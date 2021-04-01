@@ -1,6 +1,5 @@
 import { ApolloServer } from 'apollo-server-koa';
 import Koa from 'koa';
-import bodyParser from 'koa-bodyparser';
 import helmet from 'koa-helmet';
 import { createConnection } from 'typeorm';
 
@@ -18,8 +17,6 @@ app.proxy = true;
 if (app.env != 'development') {
   app.use(helmet());
 }
-
-app.use(bodyParser());
 
 app.use(authenticate);
 

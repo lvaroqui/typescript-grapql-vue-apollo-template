@@ -7,22 +7,13 @@
   "env": {
     "es6": true
   },
-  "ignorePatterns": [
-    "node_modules",
-    "build",
-    "coverage"
-  ],
-  "plugins": [
-    "import",
-    "eslint-comments"
-  ],
+  "ignorePatterns": ["node_modules", "build", "coverage"],
+  "plugins": ["import", "eslint-comments"],
   "extends": [
     "eslint:recommended",
     "plugin:eslint-comments/recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:import/typescript",
-    "prettier",
-    "prettier/@typescript-eslint"
+    "plugin:import/typescript"
   ],
   "globals": {
     "BigInt": true,

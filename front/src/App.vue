@@ -3,12 +3,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import sdk from "./sdk";
-import { useAuthStore } from "./store/auth";
+import { defineComponent } from 'vue';
+import sdk from './sdk';
+import { useAuthStore } from './store/auth';
 
 export default defineComponent({
-  name: "App",
+  name: 'App',
   setup() {
     // Check if user is connected
     sdk.me().then((data) => {

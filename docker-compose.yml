@@ -8,6 +8,7 @@ services:
     volumes:
       - ./back:/opt/back
       - yarn-cache-back:/opt/yarn-cache
+      - ./scripts:/opt/scripts:ro
     working_dir: /opt/back
     entrypoint: ./entrypoint.sh
     command: yarn run dev
@@ -31,6 +32,7 @@ services:
     volumes:
       - ./front:/opt/front
       - yarn-cache-front:/opt/yarn-cache
+      - ./scripts:/opt/scripts:ro
     working_dir: /opt/front
     entrypoint: ./entrypoint.sh
     command: yarn dev
@@ -39,6 +41,8 @@ services:
 
   nginx:
     build: nginx-dev
+    volumes:
+      - ./scripts:/opt/scripts:ro
     depends_on:
       - front
       - back
@@ -46,7 +50,7 @@ services:
       - 443:443
       - 80:80
     restart: always
-
+    stop_signal: SIGINT
 
 volumes:
   yarn-cache-back:

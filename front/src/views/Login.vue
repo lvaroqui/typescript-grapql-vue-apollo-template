@@ -8,20 +8,20 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-import sdk from "../sdk";
-import { useAuthStore } from "../store/auth";
+import { computed, defineComponent } from 'vue';
+import sdk from '../sdk';
+import { useAuthStore } from '../store/auth';
 
 export default defineComponent({
-  name: "App",
+  name: 'App',
   setup() {
     const authStore = useAuthStore();
 
     const login = () => {
       sdk
         .login({
-          email: "luc@varoqui.org",
-          password: "azerty",
+          email: 'luc@varoqui.org',
+          password: 'azerty',
         })
         .then((data) => {
           if (data.login) {

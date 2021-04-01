@@ -1,11 +1,11 @@
-import { defineStore } from "pinia";
-import { User } from "../generated/graphql-sdk";
+import { defineStore } from 'pinia';
+import { User } from '../generated/graphql-sdk';
 
 export const useAuthStore = defineStore({
-  id: "auth",
-  state: (): { user: User | null } => {
+  id: 'auth',
+  state: () => {
     return {
-      user: null,
+      user: null as User | null,
     };
   },
 });
