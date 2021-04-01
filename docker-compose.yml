@@ -2,12 +2,12 @@ version: "3.1"
 
 services:
   back:
-    image: node:12
+    image: node:14
     environment:
       YARN_CACHE_FOLDER: /opt/yarn-cache
     volumes:
       - ./back:/opt/back
-      - yarn-cache:/opt/yarn-cache
+      - yarn-cache-back:/opt/yarn-cache
     working_dir: /opt/back
     entrypoint: ./entrypoint.sh
     command: yarn run dev
@@ -25,12 +25,12 @@ services:
       POSTGRES_PASSWORD: root
 
   front:
-    image: node:12
+    image: node:14
     environment:
       YARN_CACHE_FOLDER: /opt/yarn-cache
     volumes:
       - ./front:/opt/front
-      - yarn-cache:/opt/yarn-cache
+      - yarn-cache-front:/opt/yarn-cache
     working_dir: /opt/front
     entrypoint: ./entrypoint.sh
     command: yarn dev
@@ -45,6 +45,9 @@ services:
     ports:
       - 443:443
       - 80:80
+    restart: always
+
 
 volumes:
-  yarn-cache:
+  yarn-cache-back:
+  yarn-cache-front:
