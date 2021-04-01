@@ -1,5 +1,4 @@
 <template>
-  <router-view />
   <div>
     <button @click="login">Login</button>
     <button @click="logout">Logout</button>
