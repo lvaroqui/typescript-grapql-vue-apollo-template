@@ -1,14 +1,23 @@
 <template>
-  <div>
-    <button @click="login">Login</button>
+  <div v-if="user">
+    <p v-if="user">Connected! Username: {{ user.username }}</p>
     <button @click="logout">Logout</button>
-    <p v-if="user">Username: {{ user.username }}</p>
-    <p v-else>Not connected</p>
+  </div>
+  <div v-else>
+    <div>
+      <input v-model="email" type="email" />
+    </div>
+    <div>
+      <input v-model="password" type="password" />
+    </div>
+    <div>
+      <button @click="login">Login</button>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import sdk from '../sdk';
 import { useAuthStore } from '../store/auth';
 
@@ -17,11 +26,14 @@ export default defineComponent({
   setup() {
     const authStore = useAuthStore();
 
+    const email = ref('');
+    const password = ref('');
+
     const login = () => {
       sdk
         .login({
-          email: 'luc@varoqui.org',
-          password: 'azerty',
+          email: email.value,
+          password: password.value,
         })
         .then((data) => {
           if (data.login) {
@@ -38,6 +50,8 @@ export default defineComponent({
 
     return {
       user: computed(() => authStore.user),
+      email,
+      password,
       login,
       logout,
     };
